@@ -1,0 +1,46 @@
+.add-movie-container{
+  margin-top:12px;
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+}
+
+.movie-details{
+  display: flex;
+  flex-direction: row;
+}
+
+.movie-poster{
+
+  object-fit: cover;
+  height:500px;
+  width:340px;
+  margin-top:12px;
+}
+
+.movie-box{
+  display: flex;
+  justify-content:space-between;
+}
+
+.movie-container{
+  width:340px;
+ 
+
+}
+.movie-name,.movie-rating,.movie-year{
+  font-size: 18px;
+  font-weight:bold;
+  color: #007dc6;
+}
+.movie-summary{
+margin-top:0px;
+font-size:15px;
+
+}
+
+.movie-list{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-evenly;
+}
