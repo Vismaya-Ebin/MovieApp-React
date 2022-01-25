@@ -8,6 +8,7 @@ import { useState } from "react";
 import GetTrailorDetails from "./components/GetTrailorDetails.js";
 import { AddMovies } from "./components/AddMovies.js";
 import { ShowMovieDetails } from "./components/ShowMovieDetails.js";
+import { EditDetails } from "./EditDetails";
 
 function App() {
   // const intialMovieDetails = [
@@ -160,6 +161,7 @@ function App() {
         <Route path="/add/:id">
           <GetTrailorDetails movie={movieDetails} />
         </Route>
+        <Route path="/movies/edit/:id"><EditDetails movieDetails={movieDetails} updateMovieDetails={updateMovieDetails}/></Route>
         <Route exact path="/">
           <Home />
         </Route>

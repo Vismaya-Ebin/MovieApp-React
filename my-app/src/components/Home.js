@@ -14,9 +14,7 @@ export  default function Home() {
        
         
     }
-    const backgrdStyle ={
-      background:"black"
-    }
+  
 
     const align ={
       textAlign:"center",

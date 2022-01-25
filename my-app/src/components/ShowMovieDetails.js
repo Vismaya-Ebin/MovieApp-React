@@ -4,9 +4,11 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
+import { useHistory } from "react-router-dom";
 
 
 export function ShowMovieDetails({ movieDetails,updateMovieDetails }) {
+  const history = useHistory();
   return (
     <div>
       <section className="movie-list">
@@ -19,7 +21,9 @@ export function ShowMovieDetails({ movieDetails,updateMovieDetails }) {
             rating={movie.rating}
             summary={movie.summary}
             index={index}
-            editBtn={<Button  startIcon={<EditIcon />}></Button>}
+            editBtn={<Button  onClick={()=>{
+              history.push("movies/edit/"+index)
+            }} startIcon={<EditIcon />}></Button>}
             deleBtn={
               <Button onClick={()=>{
                 const remainingMovies = movieDetails.filter((data,idx)=>{
