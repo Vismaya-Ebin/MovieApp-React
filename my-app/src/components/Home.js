@@ -9,8 +9,9 @@ export  default function Home() {
         alignItems: 'center',
         justifyContent: 'center',
         color:"yellow",
-        fontSize:"8rem",
+        fontSize:"4rem",
         textShadow: "12px 12px 15px blue",
+        flexDirection: "column",
        
         
     }
@@ -20,8 +21,8 @@ export  default function Home() {
       textAlign:"center",
       fontSize:"10rem"
     }
-  return (<div>
-    <h2  style={style}>Welcome to Movie  App</h2>
-    <p style={align} >😊</p>
+  return (<div  style={style}>
+    <h2 >😊Welcome to Movie  App 😊</h2>
+   
   </div>);
 }

@@ -3,14 +3,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 
-export function EditDetails({ movieDetails ,updateMovieDetails}) {
+export function EditDetails({ movieDetails ,updateEditedMovieDetails}) {
   const { id } = useParams();
   const data = movieDetails[id];
-  const [name, updateName] = useState("");
-  const [url, updateUrl] = useState("");
-  const [rating, updateRating] = useState("");
-  const [summary, updateSummary] = useState("");
-  const [year, updateYear] = useState("");
+  const [name, updateName] = useState(data.name);
+  const [url, updateUrl] = useState(data.url);
+  const [rating, updateRating] = useState(data.rating);
+  const [summary, updateSummary] = useState(data.summary);
+  const [year, updateYear] = useState(data.year);
 
   console.log("Edit Page Details", id, movieDetails[id]);
 
@@ -59,13 +59,14 @@ export function EditDetails({ movieDetails ,updateMovieDetails}) {
           variant="contained"
           onClick={() => {
             const newMovie = {
+              id: data.id,
               name: name,
               poster: url,
               rating: rating,
               summary: summary,
               releaseYear: year,
             };
-            updateMovieDetails([...movieDetails, newMovie]);
+            updateEditedMovieDetails(newMovie);
           }}
         >
           Save Changes

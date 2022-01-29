@@ -58,6 +58,7 @@ function App() {
   // ];
   const intialMovieDetails =[
     {
+      id:"1",
       name: "RRR",
       releaseYear:2020,
       poster:
@@ -67,7 +68,7 @@ function App() {
         "RRR is an upcoming Indian Telugu-language period action drama film directed by S. S. Rajamouli, and produced by D. V. V. Danayya of DVV Entertainments.",
       trailer: "https://www.youtube.com/embed/f_vbAtFSEc0"
     },
-    {
+    {id:"2",
       name: "Iron man 2",
       releaseYear:2020,
       poster:
@@ -77,7 +78,7 @@ function App() {
         "With the world now aware that he is Iron Man, billionaire inventor Tony Stark (Robert Downey Jr.) faces pressure from all sides to share his technology with the military. He is reluctant to divulge the secrets of his armored suit, fearing the information will fall into the wrong hands. With Pepper Potts (Gwyneth Paltrow) and Rhodes (Don Cheadle) by his side, Tony must forge new alliances and confront a powerful new enemy.",
       trailer: "https://www.youtube.com/embed/wKtcmiifycU"
     },
-    {
+    { id:"3",
       name: "No Country for Old Men",
       releaseYear:2019,
       poster:
@@ -87,7 +88,7 @@ function App() {
         "A hunter's life takes a drastic turn when he discovers two million dollars while strolling through the aftermath of a drug deal. He is then pursued by a psychopathic killer who wants the money.",
       trailer: "https://www.youtube.com/embed/38A__WT3-o0"
     },
-    {
+    {id:"4",
       name: "Jai Bhim",
       releaseYear:2018,
       poster:
@@ -98,6 +99,7 @@ function App() {
       trailer: "https://www.youtube.com/embed/nnXpbTFrqXA"
     },
     {
+      id:"5",
       name: "The Avengers",
       rating: 8,
       releaseYear:2019,
@@ -108,6 +110,7 @@ function App() {
       trailer: "https://www.youtube.com/embed/eOrNdBpGMv8"
     },
     {
+      id:"6",
       name: "Interstellar",
       releaseYear:2020,
       poster: "https://m.media-amazon.com/images/I/A1JVqNMI7UL._SL1500_.jpg",
@@ -117,6 +120,7 @@ function App() {
       trailer: "https://www.youtube.com/embed/zSWdZVtXT7E"
     },
     {
+      id:"7",
       name: "Baahubali",
       poster: "https://flxt.tmsimg.com/assets/p11546593_p_v10_af.jpg",
       releaseYear:2020,
@@ -126,6 +130,7 @@ function App() {
       trailer: "https://www.youtube.com/embed/sOEg_YZQsTI"
     },
     {
+      id:"8",
       name: "Ratatouille",
       releaseYear:2017,
       poster:
@@ -139,6 +144,22 @@ function App() {
   
   const [movieDetails, updateMovieDetails] = useState(intialMovieDetails);
 
+  const updateEditedMovieDetails =(editedData)=>{ 
+     const editedDetails = movieDetails.map((data)=>{
+       console.log("DATA", data);
+       console.log("Edited Data",editedData);
+       if(data.id === editedData.id){
+         data.name = editedData.name;
+         data.releaseYear = editedData.releaseYear;
+         data.rating = editedData.rating;
+         data.summary = editedData.summary;
+         data.trailer = editedData.trailer;
+       }
+       return data;
+     })
+   
+     updateMovieDetails(editedDetails);
+  }
   return (
     <div className="App">
       <ul>
@@ -161,7 +182,7 @@ function App() {
         <Route path="/add/:id">
           <GetTrailorDetails movie={movieDetails} />
         </Route>
-        <Route path="/movies/edit/:id"><EditDetails movieDetails={movieDetails} updateMovieDetails={updateMovieDetails}/></Route>
+        <Route path="/movies/edit/:id"><EditDetails movieDetails={movieDetails} updateEditedMovieDetails={updateEditedMovieDetails}/></Route>
         <Route exact path="/">
           <Home />
         </Route>
