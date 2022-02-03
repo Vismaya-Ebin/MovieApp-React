@@ -2,19 +2,25 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import TextField from "@mui/material/TextField";
+import { useParams } from "react-router-dom";
 
-export function AddMovies({ movieDetails, updateMovieDetails }) {
-  const [name, updateName] = useState("");
-  const [url, updateUrl] = useState("");
-  const [rating, updateRating] = useState("");
-  const [summary, updateSummary] = useState("");
-  const [year, updateYear] = useState("");
-  const [trailer, updateTrailer] = useState("");
+export function CopyEdit({ movieDetails, updateMovieDetails }) {
+  const { id } = useParams();
+  const movie = movieDetails[id];
+  console.log(`${movie}`);
+  console.log(JSON.stringify(movie));
+  const [name, updateName] = useState(movie.name);
+  const [url, updateUrl] = useState(movie.poster);
+  const [rating, updateRating] = useState(movie.rating);
+  const [summary, updateSummary] = useState(movie.summary);
+  const [year, updateYear] = useState(movie.releaseYear);
+  const [trailer, updateTrailer] = useState(movie.trailer);
   const history = useHistory();
 
   return (
     <div>
       <div className="add-movie-container">
+        <h3>Selected Movie Id {id}</h3>
         <TextField
           id="filled-basic"
           label="Name"
@@ -39,8 +45,8 @@ export function AddMovies({ movieDetails, updateMovieDetails }) {
         <TextField
           id="filled-basic"
           label="Summary"
-          value={summary}
           variant="filled"
+          value={summary}
           onChange={(e) => updateSummary(e.target.value)}
         />
         <TextField
@@ -53,26 +59,38 @@ export function AddMovies({ movieDetails, updateMovieDetails }) {
         <TextField
           id="filled-basic"
           label="Trailer"
-         
-          value={trailer}
           variant="filled"
+          value={trailer}
           onChange={(e) => updateTrailer(e.target.value)}
         />
         <Button
           variant="contained"
           onClick={() => {
-            const newMovie = {
+            const updatedMovie = {
               name: name,
               poster: url,
               rating: rating,
               summary: summary,
               releaseYear: year,
             };
-            updateMovieDetails([...movieDetails, newMovie]);
+            const copyOfMovieList = [...movieDetails];
+            copyOfMovieList[id] = updatedMovie;
+            console.log("copyOfMovieList", copyOfMovieList);
+            updateMovieDetails(copyOfMovieList);
             history.push("/show");
           }}
+          color="success"
         >
-          Add Movie
+          SAVE
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            history.goBack();
+          }}
+          color="warning"
+        >
+          BACK
         </Button>
       </div>
     </div>

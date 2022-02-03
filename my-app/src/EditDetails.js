@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-export function EditDetails({ movieDetails ,updateEditedMovieDetails}) {
+export function EditDetails({ movieDetails ,updateMovieDetails}) {
   const { id } = useParams();
+  const history = useHistory();
   const data = movieDetails[id];
   const [name, updateName] = useState(data.name);
   const [url, updateUrl] = useState(data.url);
@@ -66,7 +68,11 @@ export function EditDetails({ movieDetails ,updateEditedMovieDetails}) {
               summary: summary,
               releaseYear: year,
             };
-            updateEditedMovieDetails(newMovie);
+            const copyOFMovieList = [...movieDetails];
+            copyOFMovieList[id] = newMovie;
+            console.log("1234",copyOFMovieList)
+            updateMovieDetails(copyOFMovieList);
+            history.push("/show")
           }}
         >
           Save Changes
