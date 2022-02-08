@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 export function ShowMovieDetails() {
   const [movieDetails, updateMovieDetails] = useState([]);
   const getMovies = () => {
-    fetch("https://61b4d14c0e84b70017331992.mockapi.io/users/movies", {
+    fetch("https://61fe505ba58a4e00173c97d5.mockapi.io/movies/", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -23,10 +23,14 @@ export function ShowMovieDetails() {
   useEffect(getMovies, []);
 
   const removeItem = (id) => {
-    fetch("https://61b4d14c0e84b70017331992.mockapi.io/users/movies"+id,{
-      method: "DELETE",})
+    fetch("https://61fe505ba58a4e00173c97d5.mockapi.io/movies/" +id,{ method: "DELETE",})
       .then((data) => data.json())
-      .then(()=> getMovies());
+       .then(()=> getMovies())
+      .then((remData)=>{
+        console.log("DELETED DATA", remData);
+      })
+     
+      
   };
 
   const history = useHistory();
@@ -42,11 +46,12 @@ export function ShowMovieDetails() {
             rating={movie.rating}
             summary={movie.summary}
             index={index}
+            id={movie.id}            
             editBtn={
               <Button
                 color="warning"
                 onClick={() => {
-                  history.push("movies/edit/" + index);
+                  history.push("movies/edit/" + movie.id);
                 }}
                 startIcon={<EditIcon />}
               ></Button>
@@ -56,7 +61,7 @@ export function ShowMovieDetails() {
                 color="error"
                 onClick={() => {
                   removeItem(movie.id);
-                  alert(movie.id);
+                  console.log("ID",movie.id);
                   // const remainingMovies = movieDetails.filter((data, idx) => {
                   //   return idx !== index;
                   // });

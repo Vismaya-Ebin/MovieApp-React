@@ -6,7 +6,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreSharpIcon from "@mui/icons-material/ExpandMoreSharp";
 
-export function ViewMovie({ name, poster, rating, summary, releaseYear, index,deleBtn,editBtn }) {
+export function ViewMovie({ name, poster, rating, summary, releaseYear, index,deleBtn,editBtn ,id}) {
   const styles = { color: rating >= 8.5 ? "green" : "red" };
   const [clicked, updateClick] = useState(true);
   const toggleStyle = { display: clicked ? "block" : "none" };
@@ -31,7 +31,7 @@ export function ViewMovie({ name, poster, rating, summary, releaseYear, index,de
           <IconButton
             color="primary"
             aria-label="Movie details"
-            onClick={() => history.push("/add/" + index)}
+            onClick={() => history.push("/add/" + id)}
           >
             <InfoIcon />
           </IconButton>

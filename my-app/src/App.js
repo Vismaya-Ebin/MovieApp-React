@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./components/Home.js";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 import Notfound from "./components/Notfound.js";
-import { useState, useContext, createContext, useEffect } from "react";
+import { useState } from "react";
 
 import GetTrailorDetails from "./components/GetTrailorDetails.js";
 import { AddMovies } from "./components/AddMovies.js";
@@ -23,6 +23,7 @@ import Paper from "@mui/material/Paper";
 import { useHistory } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
+import { BasicForm } from "./components/BasicForm";
 
 function App() {
   /**Context creation */
@@ -33,9 +34,9 @@ function App() {
     },
   });
   const history = useHistory();
- 
+
   const [movieDetails, updateMovieDetails] = useState([]);
- 
+
   const style = {
     minHeight: "100vh",
     borderRadius: "0px",
@@ -75,6 +76,7 @@ function App() {
             >
               Add Movie
             </Button>
+            <Button  color="inherit" onClick={() => {history.push("/forms")}}>Form</Button>
             <Button
               color="inherit"
               onClick={() => {
@@ -95,6 +97,7 @@ function App() {
             >
               CHANGE MODE
             </Button>
+          
           </Toolbar>
         </AppBar>
 
@@ -104,13 +107,10 @@ function App() {
         <Paper style={style} elevation={0}>
           <Switch>
             <Route path="/add/:id">
-              <GetTrailorDetails movie={movieDetails} />
+              <GetTrailorDetails />
             </Route>
             <Route path="/movies/edit/:id">
-              <EditDetails
-                movieDetails={movieDetails}
-                updateMovieDetails={updateMovieDetails}
-              />
+              <EditDetails />
             </Route>
             <Route exact path="/">
               <Home />
@@ -119,21 +119,13 @@ function App() {
               <Redirect to="/movies/add" />
             </Route>
             <Route path="/movies/add">
-              <AddMovies
-                movieDetails={movieDetails}
-                updateMovieDetails={updateMovieDetails}
-              
-              />
+              <AddMovies />
             </Route>
 
             <Route path="/show">
-              <ShowMovieDetails
-                movieDetails={movieDetails}
-                updateMovieDetails={updateMovieDetails}
-            
-              />
+              <ShowMovieDetails />
             </Route>
-
+            <Route path="/forms"><BasicForm/></Route>
             <Route path="/**">
               <Notfound />
             </Route>

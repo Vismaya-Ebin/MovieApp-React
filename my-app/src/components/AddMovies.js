@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 
-export function AddMovies({ movieDetails, updateMovieDetails }) {
+export function AddMovies() {
   const [name, updateName] = useState("");
   const [url, updateUrl] = useState("");
   const [rating, updateRating] = useState("");
@@ -11,6 +11,16 @@ export function AddMovies({ movieDetails, updateMovieDetails }) {
   const [year, updateYear] = useState("");
   const [trailer, updateTrailer] = useState("");
   const history = useHistory();
+
+  const addData = (data) => {
+    fetch("https://61fe505ba58a4e00173c97d5.mockapi.io/movies/", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    }).then(() => {
+      history.push("/show");
+    });
+  };
 
   return (
     <div>
@@ -53,7 +63,6 @@ export function AddMovies({ movieDetails, updateMovieDetails }) {
         <TextField
           id="filled-basic"
           label="Trailer"
-         
           value={trailer}
           variant="filled"
           onChange={(e) => updateTrailer(e.target.value)}
@@ -67,9 +76,10 @@ export function AddMovies({ movieDetails, updateMovieDetails }) {
               rating: rating,
               summary: summary,
               releaseYear: year,
+              trailer: trailer,
             };
-            updateMovieDetails([...movieDetails, newMovie]);
-            history.push("/show");
+            // updateMovieDetails([...movieDetails, newMovie]);
+            addData(newMovie);
           }}
         >
           Add Movie
